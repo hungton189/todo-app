@@ -1,6 +1,6 @@
 .card-header
 {
-    background-color: rgb(238, 203, 107);
+    background-color: rgb(245, 227, 179);
     position: relative;
     max-height: 50px;
 }
@@ -12,10 +12,16 @@
     align-items: center;
     top: 10px;
     right: 10px;
-    background-color: rgb(240, 173, 85);
+    background-color: rgb(233, 180, 110);
     border-radius: 50%;
     width: 20px;
     height: 20px;
+    color:rgb(226, 198, 198);
+}
+.card-header .close-button:hover
+{
+    background-color: rgb(197, 42, 31);
+    transition: .2s;
 }
 .card-body .buttons 
 {
