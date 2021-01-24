@@ -1,25 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import TaskForm from './components/TaskForm/TaskForm.js';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className="container mt-20">
+			<h2 style={{textAlign: 'center'}}>Quản lý công việc</h2>
+			<div className="row mt-20">
+				<div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<TaskForm />
+				</div>
+			</div>
+		</div>
+		
+	);
 }
 
 export default App;

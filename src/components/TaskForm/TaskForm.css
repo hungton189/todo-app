@@ -1,0 +1,26 @@
+.card-header
+{
+    background-color: rgb(238, 203, 107);
+    position: relative;
+    max-height: 50px;
+}
+.card-header .close-button
+{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 10px;
+    right: 10px;
+    background-color: rgb(240, 173, 85);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+.card-body .buttons 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
