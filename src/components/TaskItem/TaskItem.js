@@ -24,12 +24,12 @@ function TaskItem(props) {
                 }    
             </td>
             <td style={{textAlign: 'center'}}>
-                <button type="button" class="btn btn-warning">
-                    <i class="fas fa-pen" style={{color:"aliceblue"}}></i>
+                <button type="button" className="btn btn-warning">
+                    <i className="fas fa-pen" style={{color:"aliceblue"}}></i>
                     &#160;Sửa
                 </button>
-                <button type="button" class="btn btn-danger ml-10">
-                    <i class="fas fa-trash"></i>
+                <button type="button" className="btn btn-danger ml-10">
+                    <i className="fas fa-trash"></i>
                     &#160;Xóa
                 </button>
             </td>

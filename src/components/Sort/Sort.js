@@ -2,9 +2,9 @@
 
 function Sort() {
 	return (
-        <button type="button" class="btn btn-primary">
+        <button type="button" className="btn btn-primary">
             Sắp xếp &#160;
-            <i class="far fa-caret-square-down"></i>
+            <i className="far fa-caret-square-down"></i>
         </button>
 	);
 }

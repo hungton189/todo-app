@@ -17,6 +17,7 @@
     width: 20px;
     height: 20px;
     color:rgb(226, 198, 198);
+    cursor: pointer;
 }
 .card-header .close-button:hover
 {
