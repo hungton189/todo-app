@@ -1,0 +1,8 @@
+.task-item-status 
+{
+    background-color: rgb(38, 129, 204);
+    border-radius: 3px;
+    padding: 1px 3px;
+    cursor: pointer;
+    color: aliceblue;
+}

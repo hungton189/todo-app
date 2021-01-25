@@ -2,10 +2,11 @@ import './App.css';
 import TaskForm from './components/TaskForm/TaskForm.js';
 import Search from "./components/Search/Search.js";
 import Sort from "./components/Sort/Sort.js";
+import TableTask from "./components/TableTask/TableTask.js";
 
 function App() {
 	return (
-		<div className="container mt-20">
+		<div className="container mt-20 mb-50">
 			<h2 style={{textAlign: 'center'}}>Quản lý công việc</h2>
 			<hr />
 			<div className="row mt-20">
@@ -23,6 +24,11 @@ function App() {
 						</div>
 						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 							<Sort />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<TableTask />
 						</div>
 					</div>
 				</div>

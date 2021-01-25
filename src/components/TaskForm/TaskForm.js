@@ -18,9 +18,9 @@ function TaskForm() {
                         <option value={1}>Kích hoạt</option>
                         <option value={0}>Ẩn</option>
                     </select>
-                    <div class="buttons mt-20">
+                    <div class="buttons ">
                         <button type="button" class="btn btn-warning">
-                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-plus" style={{color:"aliceblue"}}></i>
                             &#160; Lưu lại
                         </button>
                         <button type="button" class="btn btn-danger ml-20">

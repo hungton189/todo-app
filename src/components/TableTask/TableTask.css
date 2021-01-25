@@ -1,0 +1,14 @@
+.table-task
+{
+    width: 100%;
+    border: 2px solid rgb(189, 195, 201);
+}
+th, td
+{
+    padding: 8px;
+    border: 1px solid rgb(189, 195, 201);
+}
+th
+{
+    text-align: center;
+}
