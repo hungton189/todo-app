@@ -1,12 +1,27 @@
 import "./TaskItem.css";
 
-function TaskItem() {
+function TaskItem(props) {
+    const {task,index} = props;
 	return (
         <tr>
-            <td>1</td>
-            <td>Học lập trình ReactJs</td>
+            <td>{index + 1}</td>
+            <td>{task.name}</td>
             <td style={{textAlign: 'center'}}>
-                <span className="task-item-status">Ẩn</span>
+                {   
+                    (!task.status)?
+                    <span 
+                        className="task-item-status" 
+                        style={{backgroundColor: "red"}}
+                    >
+                        Ẩn
+                    </span>:
+                    <span 
+                        className="task-item-status" 
+                        style={{backgroundColor: "rgb(38, 129, 204)"}}
+                    >
+                        Hoạt động
+                    </span>
+                }    
             </td>
             <td style={{textAlign: 'center'}}>
                 <button type="button" class="btn btn-warning">

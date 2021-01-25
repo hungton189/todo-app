@@ -15,7 +15,7 @@ function TaskForm() {
                     <input className="form-control" />
                     <label className="mt-10"><b>Trạng thái:</b></label>
                     <select class="form-control" name="status" >
-                        <option value={1}>Kích hoạt</option>
+                        <option value={1}>Hoạt động</option>
                         <option value={0}>Ẩn</option>
                     </select>
                     <div class="buttons ">

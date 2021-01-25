@@ -1,7 +1,11 @@
 import "./TableTask.css";
 import TaskItem from "../TaskItem/TaskItem.js";
 
-function TableTask() {
+function TableTask(props) {
+    const {listTasks}  = props;
+    const elementTasks =  listTasks.map((task,index) => {
+        return <TaskItem task={task} index={index} key={task.id}/>
+    })
 	return (
         <table className="table-task" border="1">
             <tr>
@@ -19,20 +23,12 @@ function TableTask() {
                     <select name="" id="" className="form-control" >
                         <option>Tất cả</option>
                         <option>Ẩn</option>
-                        <option>Kích hoạt</option>
+                        <option>Hoạt động</option>
                     </select>
                 </td>
                 <td></td>
             </tr>
-            <TaskItem />
-            <TaskItem />
-            <TaskItem />
-            <TaskItem />
-            <TaskItem />
-            <TaskItem />
-            <TaskItem />
-            <TaskItem />
-            <TaskItem />
+            {elementTasks}
         </table>
 	);
 }
