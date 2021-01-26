@@ -2,13 +2,14 @@ import "./TableTask.css";
 import TaskItem from "../TaskItem/TaskItem.js";
 
 function TableTask(props) {
-    const {listTask,toggleStatusTask}  = props;
+    const {listTask,toggleStatusTask,onDeleteTask}  = props;
     const elementTasks =  listTask.map((task,index) => {
         return <TaskItem 
                     task={task} 
                     index={index} 
                     key={task.id} 
                     toggleStatusTask={toggleStatusTask}
+                    onDeleteTask={onDeleteTask}
                 />
     })
 	return (

@@ -1,7 +1,7 @@
 import "./TaskItem.css";
 
 function TaskItem(props) {
-    const {task,index,toggleStatusTask} = props;
+    const {task,index,toggleStatusTask,onDeleteTask} = props;
 	return (
         <tr>
             <td>{index + 1}</td>
@@ -30,7 +30,11 @@ function TaskItem(props) {
                     <i className="fas fa-pen" style={{color:"aliceblue"}}></i>
                     &#160;Sửa
                 </button>
-                <button type="button" className="btn btn-danger ml-10">
+                <button 
+                    type="button" 
+                    className="btn btn-danger ml-10"
+                    onClick={()=>onDeleteTask(task.id)}
+                >
                     <i className="fas fa-trash"></i>
                     &#160;Xóa
                 </button>
