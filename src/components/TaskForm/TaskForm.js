@@ -1,11 +1,23 @@
 import "./TaskForm.css";
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import {generateId} from "../generateID";
 
 function TaskForm(props) {
+    const {addTask,taskUpdate,onHandleUpdateTask,closeForm} = props;
     const [name,setName] = useState("");
     const [status, setStatus] = useState(true);
-    const {toggleDisplayForm, addTask} = props;
+
+    useEffect(()=>{
+        if(taskUpdate){
+            setName(taskUpdate.name);
+            setStatus(taskUpdate.status);
+        }
+        else
+        {
+            setName("");
+            setStatus(true);
+        }
+    },[taskUpdate])
 
     const onChange = (event) => 
     {
@@ -28,7 +40,14 @@ function TaskForm(props) {
             name,
             status
         };
-        addTask(task);
+        if(!taskUpdate)
+        {
+            addTask(task);
+        }
+        else
+        {
+            onHandleUpdateTask(task);
+        }
         onReset();
     }
     const onReset = ()=>
@@ -39,8 +58,8 @@ function TaskForm(props) {
 	return (
         <div className="card">
             <div className="card-header">
-                <p> Thêm công việc </p>
-                <div className="close-button" onClick={toggleDisplayForm}>
+                <p>{(taskUpdate)?"Cập nhật công việc":"Thêm công việc"}</p>
+                <div className="close-button" onClick={closeForm}>
                     <i className="fas fa-times"></i>
                 </div>
             </div>

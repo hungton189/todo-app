@@ -8,6 +8,7 @@ import TableTask from "./components/TableTask/TableTask.js";
 function App() {
 	const [listTask,setListTask] = useState([]);
 	const [isDisplayForm,setDisplayForm] = useState(false);
+	const [taskUpdate,setTaskUpdate] = useState(null);
 
 	useEffect(()=>{
 		if(localStorage && localStorage.getItem('listTask'))
@@ -18,7 +19,16 @@ function App() {
 	},[])
 	const toggleDisplayForm = ()=>
 	{
+		if(taskUpdate && isDisplayForm)
+		{
+			setTaskUpdate(null);
+			return;
+		}
 		setDisplayForm(isDisplayForm=>!isDisplayForm);
+	}
+	const closeForm = ()=>
+	{
+		setDisplayForm(false);
 	}
 	const addTask = (task)=>
 	{
@@ -38,6 +48,28 @@ function App() {
 			},
 			...listTask.slice(index + 1)
 		];
+		setListTask(tasks);
+		localStorage.setItem("listTask",JSON.stringify(tasks));
+	}
+	const onUpdateTask = (id)=>
+	{
+		setDisplayForm(true);
+		const task= listTask.find(task => task.id === id);
+		setTaskUpdate(task);
+	}
+	const onHandleUpdateTask = (task)=>
+	{
+		if(!taskUpdate) return;
+		const index= listTask.indexOf(taskUpdate);
+		const tasks = [
+			...listTask.slice(0,index),
+			{
+				...task,
+			},
+			...listTask.slice(index + 1)
+		];
+		setDisplayForm(false);
+		setTaskUpdate(null);
 		setListTask(tasks);
 		localStorage.setItem("listTask",JSON.stringify(tasks));
 	}
@@ -63,6 +95,9 @@ function App() {
 						(isDisplayForm)? <TaskForm 
 											toggleDisplayForm={toggleDisplayForm} 
 											addTask = {addTask}
+											taskUpdate={taskUpdate}
+											onHandleUpdateTask={onHandleUpdateTask}
+											closeForm={closeForm}
 										/>:""
 					}
 				</div>
@@ -91,6 +126,7 @@ function App() {
 									listTask={listTask} 
 									toggleStatusTask={toggleStatusTask}
 									onDeleteTask={onDeleteTask}
+									onUpdateTask={onUpdateTask}
 							/>
 						</div>
 					</div>

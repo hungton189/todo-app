@@ -1,7 +1,7 @@
 import "./TaskItem.css";
 
 function TaskItem(props) {
-    const {task,index,toggleStatusTask,onDeleteTask} = props;
+    const {task,index,toggleStatusTask,onDeleteTask,onUpdateTask} = props;
 	return (
         <tr>
             <td>{index + 1}</td>
@@ -26,7 +26,11 @@ function TaskItem(props) {
                 }    
             </td>
             <td style={{textAlign: 'center'}}>
-                <button type="button" className="btn btn-warning">
+                <button 
+                    type="button" 
+                    className="btn btn-warning"
+                    onClick={()=>onUpdateTask(task.id)}
+                >
                     <i className="fas fa-pen" style={{color:"aliceblue"}}></i>
                     &#160;Sửa
                 </button>

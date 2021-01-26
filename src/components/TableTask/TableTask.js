@@ -2,7 +2,7 @@ import "./TableTask.css";
 import TaskItem from "../TaskItem/TaskItem.js";
 
 function TableTask(props) {
-    const {listTask,toggleStatusTask,onDeleteTask}  = props;
+    const {listTask,toggleStatusTask,onDeleteTask,onUpdateTask}  = props;
     const elementTasks =  listTask.map((task,index) => {
         return <TaskItem 
                     task={task} 
@@ -10,6 +10,7 @@ function TableTask(props) {
                     key={task.id} 
                     toggleStatusTask={toggleStatusTask}
                     onDeleteTask={onDeleteTask}
+                    onUpdateTask={onUpdateTask}
                 />
     })
 	return (
