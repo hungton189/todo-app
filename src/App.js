@@ -6,19 +6,26 @@ import Sort from "./components/Sort/Sort.js";
 import TableTask from "./components/TableTask/TableTask.js";
 
 function App() {
-	const [listTasks,setListTasks] = useState([]);
+	const [listTask,setListTask] = useState([]);
 	const [isDisplayForm,setDisplayForm] = useState(false);
 
 	useEffect(()=>{
 		if(localStorage && localStorage.getItem('listTask'))
 		{
 			const tasks = JSON.parse(localStorage.getItem('listTask'));
-			setListTasks(tasks);
+			setListTask(tasks);
 		}
 	},[])
 	const toggleDisplayForm = ()=>
 	{
 		setDisplayForm(isDisplayForm=>!isDisplayForm);
+	}
+	const addTask = (task)=>
+	{
+		const tasks = [...listTask];
+		tasks.push(task);
+		setListTask(tasks);
+		localStorage.setItem("listTask",JSON.stringify(tasks));
 	}
 	return (
 		<div className="container mt-20 mb-50">
@@ -31,7 +38,10 @@ function App() {
 						"col-xs-0 col-sm-0 col-md-0 col-lg-0"
 					}>
 					{
-						(isDisplayForm)? <TaskForm toggleDisplayForm={toggleDisplayForm}/>:""
+						(isDisplayForm)? <TaskForm 
+											toggleDisplayForm={toggleDisplayForm} 
+											addTask = {addTask}
+										/>:""
 					}
 				</div>
 				<div className=
@@ -55,7 +65,7 @@ function App() {
 					</div>
 					<div className="row">
 						<div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<TableTask listTasks={listTasks}/>
+							<TableTask listTask={listTask}/>
 						</div>
 					</div>
 				</div>

@@ -2,8 +2,8 @@ import "./TableTask.css";
 import TaskItem from "../TaskItem/TaskItem.js";
 
 function TableTask(props) {
-    const {listTasks}  = props;
-    const elementTasks =  listTasks.map((task,index) => {
+    const {listTask}  = props;
+    const elementTasks =  listTask.map((task,index) => {
         return <TaskItem task={task} index={index} key={task.id}/>
     })
 	return (
