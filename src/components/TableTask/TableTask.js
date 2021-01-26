@@ -1,8 +1,26 @@
 import "./TableTask.css";
+import {useState} from "react";
 import TaskItem from "../TaskItem/TaskItem.js";
 
 function TableTask(props) {
-    const {listTask,toggleStatusTask,onDeleteTask,onUpdateTask}  = props;
+    const [filterName, setFilterName] = useState("");
+    const [filterStatus, setFilterStatus] = useState(-1);
+    const {listTask,toggleStatusTask,onDeleteTask,onUpdateTask,onFilter}  = props;
+
+    const onChange = (event) =>
+    {
+        const {name,value} = event.target;
+        if(name ==="filterName")
+        {
+            onFilter(value,filterStatus);
+            setFilterName(value);
+        }
+        else
+        {
+            onFilter(filterName,value);
+            setFilterStatus(value);
+        }
+    }
     const elementTasks =  listTask.map((task,index) => {
         return <TaskItem 
                     task={task} 
@@ -24,13 +42,24 @@ function TableTask(props) {
             <tr>
                 <td></td>
                 <td>
-                    <input type="text" name="" className="form-control" placeholder="" />
+                    <input 
+                        type = "text" 
+                        name = "filterName" 
+                        className = "form-control"
+                        value = {filterName}
+                        onChange={onChange}
+                    />
                 </td>
                 <td>
-                    <select name="" id="" className="form-control" >
-                        <option>Tất cả</option>
-                        <option>Ẩn</option>
-                        <option>Hoạt động</option>
+                    <select 
+                        name = "filterStatus" 
+                        className = "form-control"
+                        value = {filterStatus}
+                        onChange = {onChange}
+                    >
+                        <option value = {-1}>Tất cả</option>
+                        <option value = {0}>Ẩn</option>
+                        <option value = {1}>Hoạt động</option>
                     </select>
                 </td>
                 <td></td>

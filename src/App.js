@@ -4,16 +4,18 @@ import TaskForm from './components/TaskForm/TaskForm.js';
 import Search from "./components/Search/Search.js";
 import Sort from "./components/Sort/Sort.js";
 import TableTask from "./components/TableTask/TableTask.js";
+import {filterData} from "./components/FilterData.js";
 
 function App() {
 	const [listTask,setListTask] = useState([]);
 	const [isDisplayForm,setDisplayForm] = useState(false);
 	const [taskUpdate,setTaskUpdate] = useState(null);
+	const [filter,setFilter] = useState({name:"",status:-1});
 
 	useEffect(()=>{
 		if(localStorage && localStorage.getItem('listTask'))
 		{
-			const tasks = JSON.parse(localStorage.getItem('listTask'));
+			let tasks = JSON.parse(localStorage.getItem('listTask'));
 			setListTask(tasks);
 		}
 	},[])
@@ -60,7 +62,10 @@ function App() {
 	const onHandleUpdateTask = (task)=>
 	{
 		if(!taskUpdate) return;
+		setDisplayForm(false);
+		setTaskUpdate(null);
 		const index= listTask.indexOf(taskUpdate);
+		if(index===-1) return;
 		const tasks = [
 			...listTask.slice(0,index),
 			{
@@ -68,8 +73,6 @@ function App() {
 			},
 			...listTask.slice(index + 1)
 		];
-		setDisplayForm(false);
-		setTaskUpdate(null);
 		setListTask(tasks);
 		localStorage.setItem("listTask",JSON.stringify(tasks));
 	}
@@ -81,6 +84,12 @@ function App() {
 		setListTask(tasks);
 		localStorage.setItem("listTask",JSON.stringify(tasks));
 	}
+	const onFilter = (name,status) =>
+	{
+		setFilter({name,status});
+	}
+
+	var tasks = filterData(listTask,filter);
 	return (
 		<div className="container mt-20 mb-50">
 			<h2 style={{textAlign: 'center'}}>Quản lý công việc</h2>
@@ -123,10 +132,11 @@ function App() {
 					<div className="row">
 						<div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<TableTask 
-									listTask={listTask} 
+									listTask={tasks} 
 									toggleStatusTask={toggleStatusTask}
 									onDeleteTask={onDeleteTask}
 									onUpdateTask={onUpdateTask}
+									onFilter={onFilter}
 							/>
 						</div>
 					</div>
