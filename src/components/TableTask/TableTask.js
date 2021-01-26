@@ -2,9 +2,14 @@ import "./TableTask.css";
 import TaskItem from "../TaskItem/TaskItem.js";
 
 function TableTask(props) {
-    const {listTask}  = props;
+    const {listTask,toggleStatusTask}  = props;
     const elementTasks =  listTask.map((task,index) => {
-        return <TaskItem task={task} index={index} key={task.id}/>
+        return <TaskItem 
+                    task={task} 
+                    index={index} 
+                    key={task.id} 
+                    toggleStatusTask={toggleStatusTask}
+                />
     })
 	return (
         <table className="table-task" border="1">

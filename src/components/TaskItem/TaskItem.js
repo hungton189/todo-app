@@ -1,7 +1,7 @@
 import "./TaskItem.css";
 
 function TaskItem(props) {
-    const {task,index} = props;
+    const {task,index,toggleStatusTask} = props;
 	return (
         <tr>
             <td>{index + 1}</td>
@@ -12,12 +12,14 @@ function TaskItem(props) {
                     <span 
                         className="task-item-status" 
                         style={{backgroundColor: "red"}}
+                        onClick={()=>toggleStatusTask(task.id)}
                     >
                         Ẩn
                     </span>:
                     <span 
                         className="task-item-status" 
                         style={{backgroundColor: "rgb(38, 129, 204)"}}
+                        onClick={()=>toggleStatusTask(task.id)}
                     >
                         Hoạt động
                     </span>

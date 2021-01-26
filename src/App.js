@@ -27,6 +27,20 @@ function App() {
 		setListTask(tasks);
 		localStorage.setItem("listTask",JSON.stringify(tasks));
 	}
+	const toggleStatusTask = (id) => {
+		const task = listTask.find(task=>task.id === id);
+		const index = listTask.indexOf(task);
+		const tasks = [
+			...listTask.slice(0,index),
+			{
+				...task,
+				status:!task.status,
+			},
+			...listTask.slice(index + 1)
+		];
+		setListTask(tasks);
+		localStorage.setItem("listTask",JSON.stringify(tasks));
+	}
 	return (
 		<div className="container mt-20 mb-50">
 			<h2 style={{textAlign: 'center'}}>Quản lý công việc</h2>
@@ -65,7 +79,7 @@ function App() {
 					</div>
 					<div className="row">
 						<div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<TableTask listTask={listTask}/>
+							<TableTask listTask={listTask} toggleStatusTask={toggleStatusTask}/>
 						</div>
 					</div>
 				</div>
