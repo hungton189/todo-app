@@ -12,6 +12,7 @@ function App() {
 	const [taskUpdate,setTaskUpdate] = useState(null);
 	const [filter,setFilter] = useState({name:"",status:-1});
 	const [keyword,setKeyword] = useState("");
+	const [sort,setSort] = useState(null);
 
 	useEffect(()=>{
 		if(localStorage && localStorage.getItem('listTask'))
@@ -94,11 +95,34 @@ function App() {
 	{
 		setKeyword(keyword);
 	}
+	const onHandleSort = (sort) =>
+	{
+		setSort(sort);
+	}
 
 	var tasks = filterData(listTask,filter);
 	tasks = tasks.filter(task =>{
 		return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
-    });
+	});
+	if(sort) 
+	{
+		console.log(sort);
+		if(sort.by==="name")
+		{
+			tasks.sort((a,b)=>
+			{
+				return (a.name >b.name) ? sort.value : -sort.value;
+			})
+		}
+		else
+		{
+			tasks.sort((a,b)=>
+			{
+				return (a.status >b.status) ? -sort.value : sort.value;
+			})
+		}
+		console.log(tasks);
+	}
 	return (
 		<div className="container mt-20 mb-50">
 			<h2 style={{textAlign: 'center'}}>Quản lý công việc</h2>
@@ -135,7 +159,7 @@ function App() {
 							<Search onSearch={onSearch}/>
 						</div>
 						<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-							<Sort />
+							<Sort onHandleSort={onHandleSort}/>
 						</div>
 					</div>
 					<div className="row">

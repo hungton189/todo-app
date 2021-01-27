@@ -1,0 +1,44 @@
+.sort
+{
+    position: relative;
+    /* overflow: visible; */
+}
+.sort .btn-sort
+{
+    background-color:rgb(0 123 255);
+    outline:none;
+    border:none;
+    padding: 6px 8px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    color:aliceblue;
+    cursor: pointer;
+}
+
+.sort .form-sort
+{
+    position: absolute;
+    flex-direction: column;
+    background-color:white;
+    min-width: 200px;
+    display:block;
+    z-index: 1;
+    border:1px solid rgb(239, 241, 243);
+    padding: 6px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+.sort .form-sort span{
+    display: block;
+    padding:6px;
+}
+
+.sort .form-sort span:hover
+{
+    background-color: aliceblue;
+}
+
+.sort .form-sort hr
+{
+    margin:0;
+}
