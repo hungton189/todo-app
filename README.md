@@ -10,7 +10,7 @@ git clone https://github.com/hungton189/todo-app.git
 
 ### `run`
 
-yarn start
+yarn start\
 website will start on localhost:3000
 
 ### `yarn build`

@@ -1,12 +1,12 @@
 import "./TableTask.css";
 import {useState} from "react";
 import TaskItem from "../TaskItem/TaskItem.js";
+import {connect} from "react-redux";
 
 function TableTask(props) {
     const [filterName, setFilterName] = useState("");
     const [filterStatus, setFilterStatus] = useState(-1);
     const {listTask,toggleStatusTask,onDeleteTask,onUpdateTask,onFilter}  = props;
-
     const onChange = (event) =>
     {
         const {name,value} = event.target;
@@ -69,4 +69,10 @@ function TableTask(props) {
 	);
 }
 
-export default TableTask;
+const mapStateToProps = (state) => {
+    return {
+        listTask:state.tasks
+    }
+}
+
+export default connect(mapStateToProps,null)(TableTask);

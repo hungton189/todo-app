@@ -165,7 +165,6 @@ function App() {
 					<div className="row">
 						<div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<TableTask 
-									listTask={tasks} 
 									toggleStatusTask={toggleStatusTask}
 									onDeleteTask={onDeleteTask}
 									onUpdateTask={onUpdateTask}
