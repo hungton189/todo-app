@@ -3,7 +3,12 @@ import {connect} from "react-redux";
 import * as actions from "../../actions/index";
 
 function TaskItem(props) {
-    const {task,index,toggleStatusTask,onDeleteTask,onUpdateTask} = props;
+    const {task,index,toggleStatusTask,onDeleteTask,onOpenForm,updateTaskEditing} = props;
+    const onUpdateTask = (task)=>
+    {
+        onOpenForm();
+        updateTaskEditing(task);
+    }
 	return (
         <tr>
             <td>{index + 1}</td>
@@ -31,7 +36,7 @@ function TaskItem(props) {
                 <button 
                     type="button" 
                     className="btn btn-warning"
-                    onClick={()=>onUpdateTask(task.id)}
+                    onClick={()=>onUpdateTask(task)}
                 >
                     <i className="fas fa-pen" style={{color:"aliceblue"}}></i>
                     &#160;Sửa
@@ -61,6 +66,13 @@ const mapDispatchToProps = (dispatch,props) => {
         },
         onDeleteTask:(id)=>{
             dispatch(actions.deleteTask(id));
+        },
+        onOpenForm: ()=>
+        {
+            dispatch(actions.openForm());
+        },
+        updateTaskEditing:(task)=>{
+            dispatch(actions.updateTaskEditing(task));
         }
     }
 }

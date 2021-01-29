@@ -9,34 +9,11 @@ import {connect} from "react-redux";
 import * as actions from "./actions/index";
 
 function App(props) {
-	const [taskUpdate,setTaskUpdate] = useState(null);
 	const [filter,setFilter] = useState({name:"",status:-1});
 	const [keyword,setKeyword] = useState("");
 	const [sort,setSort] = useState(null);
-	const {isDisplayForm,onToggleForm} = props;
+	const {isDisplayForm,onToggleForm,taskEditing,updateTaskEditing} = props;
 
-	const onUpdateTask = (id)=>
-	{
-		// const task= listTask.find(task => task.id === id);
-		// setTaskUpdate(task);
-	}
-	const onHandleUpdateTask = (task)=>
-	{
-		// if(!taskUpdate) return;
-		// setDisplayForm(false);
-		// setTaskUpdate(null);
-		// const index= listTask.indexOf(taskUpdate);
-		// if(index===-1) return;
-		// const tasks = [
-		// 	// ...listTask.slice(0,index),
-		// 	{
-		// 		...task,
-		// 	},
-		// 	...listTask.slice(index + 1)
-		// ];
-		// setListTask(tasks);
-		// localStorage.setItem("listTask",JSON.stringify(tasks));
-	}
 	const onFilter = (name,status) =>
 	{
 		setFilter({name,status});
@@ -74,6 +51,13 @@ function App(props) {
 	// 	}
 	// 	console.log(tasks);
 	// }
+	const onClickButton = () =>{
+		if(taskEditing.id){
+			updateTaskEditing({});
+			return;
+		}
+		onToggleForm();
+	}
 	return (
 		<div className="container mt-20 mb-50">
 			<h2 style={{textAlign: 'center'}}>Quản lý công việc</h2>
@@ -85,10 +69,7 @@ function App(props) {
 						"col-xs-0 col-sm-0 col-md-0 col-lg-0"
 					}>
 					{
-						(isDisplayForm)? <TaskForm 
-											taskUpdate={taskUpdate}
-											onHandleUpdateTask={onHandleUpdateTask}
-										/>:""
+						(isDisplayForm)? <TaskForm />:""
 					}
 				</div>
 				<div className=
@@ -97,7 +78,7 @@ function App(props) {
 						"col-xs-12 col-sm-12 col-md-12 col-lg-12"
 					} >
 					<button type="button" className="btn btn-primary"
-						onClick={onToggleForm} 
+						onClick={onClickButton} 
 					>
 						<i className="fas fa-plus"></i>
                         &#160; Thêm công việc
@@ -113,7 +94,6 @@ function App(props) {
 					<div className="row">
 						<div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<TableTask
-									onUpdateTask={onUpdateTask}
 									onFilter={onFilter}
 							/>
 						</div>
@@ -126,7 +106,8 @@ function App(props) {
 }
 const mapStateToProps = state => {
 	return {
-		isDisplayForm:state.isDisplayForm
+		isDisplayForm:state.isDisplayForm,
+		taskEditing:state.taskEditing
 	}
 }
 const mapDispatchToProps = (dispatch,props) => 
@@ -135,7 +116,10 @@ const mapDispatchToProps = (dispatch,props) =>
 		onToggleForm:()=>
 		{
 			dispatch(actions.toggleForm())
-		}
+		},
+		updateTaskEditing:(task)=>{
+            dispatch(actions.updateTaskEditing(task));
+        }
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps) (App);

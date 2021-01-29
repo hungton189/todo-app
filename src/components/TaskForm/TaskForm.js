@@ -1,67 +1,57 @@
 import "./TaskForm.css";
 import {useState,useEffect} from "react";
-import {generateId} from "../generateID";
 import {connect} from "react-redux";
 import * as actions from "../../actions/index.js";
 
 function TaskForm(props) {
-    const {onAddTask,taskUpdate,onHandleUpdateTask,onCloseForm} = props;
+    const {onSaveTask,taskEditing,onCloseForm,updateTaskEditing} = props;
     const [name,setName] = useState("");
     const [status, setStatus] = useState(true);
 
     useEffect(()=>{
-        if(taskUpdate){
-            setName(taskUpdate.name);
-            setStatus(taskUpdate.status);
+        if(taskEditing.name){
+            setName(taskEditing.name);
+            setStatus(taskEditing.status);
         }
-        else
-        {
+        else{
             setName("");
             setStatus(true);
         }
-    },[taskUpdate])
+    },[taskEditing])
 
-    const onChange = (event) => 
-    {
+    const onChange = (event) => {
         const {value,name} = event.target;
-        if(name === "status")
-        {
+        if(name === "status") {
             setStatus((value==="true")?true:false);
         }
-        else if (name === "name")
-        {
+        else if (name === "name") {
             setName(value);
         }
     }
-    const onSubmit = (event) => 
-    {
+    const onSubmit = (event) => {
         event.preventDefault();
         if(name==="") return;
         const task = {
-            id:generateId(),
+            id:taskEditing.id,
             name,
             status
         };
-        if(!taskUpdate)
-        {
-            onAddTask(task);
-        }
-        else
-        {
-            onHandleUpdateTask(task);
-        }
-        onReset();
+        onSaveTask(task);
+        onClearForm();
     }
-    const onReset = ()=>
-    {
+    const onClearForm = ()=>{
         setName("");
         setStatus(true);
+    }
+    const onClickCloseForm = ()=>{
+        updateTaskEditing({});
+        onCloseForm();
     }
 	return (
         <div className="card">
             <div className="card-header">
-                <p>{(taskUpdate)?"Cập nhật công việc":"Thêm công việc"}</p>
-                <div className="close-button" onClick={onCloseForm}>
+                <p>{(taskEditing.name)?"Cập nhật công việc":"Thêm công việc"}</p>
+                <div className="close-button" onClick={onClickCloseForm}>
                     <i className="fas fa-times"></i>
                 </div>
             </div>
@@ -89,7 +79,7 @@ function TaskForm(props) {
                             <i className="fas fa-plus" style={{color:"aliceblue"}}></i>
                             &#160; Lưu lại
                         </button>
-                        <button type="button" className="btn btn-danger ml-20" onClick={onReset}>
+                        <button type="button" className="btn btn-danger ml-20" onClick={onClearForm}>
                             <i className="fas fa-times"></i>
                             &#160; Hủy bỏ
                         </button>
@@ -102,18 +92,21 @@ function TaskForm(props) {
 
 const mapStateToProps = state => {
     return {
-
+        taskEditing:state.taskEditing
     }
 }
 
 const mapDispatchToProps = (dispatch,props) => 
 {
     return {
-        onAddTask: (task) => {
-            dispatch(actions.addTask(task))
+        onSaveTask: (task) => {
+            dispatch(actions.onSaveTask(task))
         },
         onCloseForm:()=>{
             dispatch(actions.closeForm())
+        },
+		updateTaskEditing:(task)=>{
+            dispatch(actions.updateTaskEditing(task));
         }
     }
 }
