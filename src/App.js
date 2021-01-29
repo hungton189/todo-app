@@ -37,14 +37,6 @@ function App(props) {
 		// setListTask(tasks);
 		// localStorage.setItem("listTask",JSON.stringify(tasks));
 	}
-	const onDeleteTask = (id) => 
-	{
-		// const task = listTask.find(task=>task.id === id);
-		// const index = listTask.indexOf(task);
-		// const tasks = listTask.slice(0,index).concat(listTask.slice(index + 1));
-		// setListTask(tasks);
-		// localStorage.setItem("listTask",JSON.stringify(tasks));
-	}
 	const onFilter = (name,status) =>
 	{
 		setFilter({name,status});
@@ -120,8 +112,7 @@ function App(props) {
 					</div>
 					<div className="row">
 						<div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<TableTask 
-									onDeleteTask={onDeleteTask}
+							<TableTask
 									onUpdateTask={onUpdateTask}
 									onFilter={onFilter}
 							/>

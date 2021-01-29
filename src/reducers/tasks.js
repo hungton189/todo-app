@@ -13,8 +13,8 @@ const taskReducer = (state = initialState, action)=>
             return [...state];
         case types.TOGGLE_STATUS_TASK:
             var tasks = [...state];
-            const task = tasks.find(task => task.id === action.id);
-            const index = tasks.indexOf(task);
+            let task = tasks.find(task => task.id === action.id);
+            let index = tasks.indexOf(task);
             state = [
                 ...tasks.slice(0,index),
                 {
@@ -23,6 +23,12 @@ const taskReducer = (state = initialState, action)=>
                 },
                 ...tasks.slice(index + 1)
             ];
+            localStorage.setItem("listTask",JSON.stringify(state));
+            return [...state];
+        case types.DELETE_TASK:
+            const indexItem = state.findIndex(item=> item.id ===action.id)
+            console.log(indexItem);
+            state.splice(indexItem, 1);
             localStorage.setItem("listTask",JSON.stringify(state));
             return [...state];
         default:

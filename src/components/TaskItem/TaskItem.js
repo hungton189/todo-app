@@ -58,8 +58,10 @@ const mapDispatchToProps = (dispatch,props) => {
     return {
         toggleStatusTask:(id)=>{
             dispatch(actions.toggleStatusTask(id));
+        },
+        onDeleteTask:(id)=>{
+            dispatch(actions.deleteTask(id));
         }
-
     }
 }
 
