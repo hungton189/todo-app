@@ -5,34 +5,16 @@ import Search from "./components/Search/Search.js";
 import Sort from "./components/Sort/Sort.js";
 import TableTask from "./components/TableTask/TableTask.js";
 import {filterData} from "./components/FilterData.js";
+import {connect} from "react-redux";
+import * as actions from "./actions/index";
 
-function App() {
-	const [isDisplayForm,setDisplayForm] = useState(false);
+function App(props) {
 	const [taskUpdate,setTaskUpdate] = useState(null);
 	const [filter,setFilter] = useState({name:"",status:-1});
 	const [keyword,setKeyword] = useState("");
 	const [sort,setSort] = useState(null);
+	const {isDisplayForm,onToggleForm} = props;
 
-	const toggleDisplayForm = ()=>
-	{
-		if(taskUpdate && isDisplayForm)
-		{
-			setTaskUpdate(null);
-			return;
-		}
-		setDisplayForm(isDisplayForm=>!isDisplayForm);
-	}
-	const closeForm = ()=>
-	{
-		setDisplayForm(false);
-	}
-	const addTask = (task)=>
-	{
-		// const tasks = [...listTask];
-		// tasks.push(task);
-		// setListTask(tasks);
-		// localStorage.setItem("listTask",JSON.stringify(tasks));
-	}
 	const toggleStatusTask = (id) => {
 		// const task = listTask.find(task=>task.id === id);
 		// const index = listTask.indexOf(task);
@@ -49,7 +31,6 @@ function App() {
 	}
 	const onUpdateTask = (id)=>
 	{
-		setDisplayForm(true);
 		// const task= listTask.find(task => task.id === id);
 		// setTaskUpdate(task);
 	}
@@ -127,10 +108,8 @@ function App() {
 					}>
 					{
 						(isDisplayForm)? <TaskForm 
-											addTask = {addTask}
 											taskUpdate={taskUpdate}
 											onHandleUpdateTask={onHandleUpdateTask}
-											closeForm={closeForm}
 										/>:""
 					}
 				</div>
@@ -139,8 +118,8 @@ function App() {
 						(isDisplayForm)? "col-xs-8 col-sm-8 col-md-8 col-lg-8" :
 						"col-xs-12 col-sm-12 col-md-12 col-lg-12"
 					} >
-					<button type="button" className="btn btn-primary" 
-						onClick={toggleDisplayForm}
+					<button type="button" className="btn btn-primary"
+						onClick={onToggleForm} 
 					>
 						<i className="fas fa-plus"></i>
                         &#160; Thêm công việc
@@ -169,5 +148,18 @@ function App() {
 		
 	);
 }
-
-export default App;
+const mapStateToProps = state => {
+	return {
+		isDisplayForm:state.isDisplayForm
+	}
+}
+const mapDispatchToProps = (dispatch,props) => 
+{
+	return {
+		onToggleForm:()=>
+		{
+			dispatch(actions.toggleForm())
+		}
+	}
+}
+export default connect(mapStateToProps, mapDispatchToProps) (App);

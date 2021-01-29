@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import * as actions from "../../actions/index.js";
 
 function TaskForm(props) {
-    const {onAddTask,taskUpdate,onHandleUpdateTask,closeForm} = props;
+    const {onAddTask,taskUpdate,onHandleUpdateTask,onCloseForm} = props;
     const [name,setName] = useState("");
     const [status, setStatus] = useState(true);
 
@@ -61,7 +61,7 @@ function TaskForm(props) {
         <div className="card">
             <div className="card-header">
                 <p>{(taskUpdate)?"Cập nhật công việc":"Thêm công việc"}</p>
-                <div className="close-button" onClick={closeForm}>
+                <div className="close-button" onClick={onCloseForm}>
                     <i className="fas fa-times"></i>
                 </div>
             </div>
@@ -111,6 +111,9 @@ const mapDispatchToProps = (dispatch,props) =>
     return {
         onAddTask: (task) => {
             dispatch(actions.addTask(task))
+        },
+        onCloseForm:()=>{
+            dispatch(actions.closeForm())
         }
     }
 }
