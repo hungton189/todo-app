@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 function TableTask(props) {
     const [filterName, setFilterName] = useState("");
     const [filterStatus, setFilterStatus] = useState(-1);
-    const {listTask,toggleStatusTask,onDeleteTask,onUpdateTask,onFilter}  = props;
+    const {listTask,onDeleteTask,onUpdateTask,onFilter}  = props;
     const onChange = (event) =>
     {
         const {name,value} = event.target;
@@ -26,7 +26,6 @@ function TableTask(props) {
                     task={task} 
                     index={index} 
                     key={task.id} 
-                    toggleStatusTask={toggleStatusTask}
                     onDeleteTask={onDeleteTask}
                     onUpdateTask={onUpdateTask}
                 />

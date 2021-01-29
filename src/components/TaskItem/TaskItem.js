@@ -1,4 +1,6 @@
 import "./TaskItem.css";
+import {connect} from "react-redux";
+import * as actions from "../../actions/index";
 
 function TaskItem(props) {
     const {task,index,toggleStatusTask,onDeleteTask,onUpdateTask} = props;
@@ -46,5 +48,19 @@ function TaskItem(props) {
         </tr>
 	);
 }
+const mapStateToProps = (state) => {
+    return {
 
-export default TaskItem;
+    }
+}
+
+const mapDispatchToProps = (dispatch,props) => {
+    return {
+        toggleStatusTask:(id)=>{
+            dispatch(actions.toggleStatusTask(id));
+        }
+
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(TaskItem);

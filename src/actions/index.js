@@ -7,13 +7,18 @@ export const listAll = () =>
     }
 }
 
-export const addTask = (task) => 
-{
+export const addTask = (task) => {
     return {
         type:types.ADD_TASK,
         task
     }
 }
+export const toggleStatusTask = (id) =>{
+    return {
+        type:types.TOGGLE_STATUS_TASK,
+        id
+    }
+} 
 
 export const toggleForm = () =>
 {

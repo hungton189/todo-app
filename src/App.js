@@ -15,20 +15,6 @@ function App(props) {
 	const [sort,setSort] = useState(null);
 	const {isDisplayForm,onToggleForm} = props;
 
-	const toggleStatusTask = (id) => {
-		// const task = listTask.find(task=>task.id === id);
-		// const index = listTask.indexOf(task);
-		// const tasks = [
-		// 	...listTask.slice(0,index),
-		// 	{
-		// 		...task,
-		// 		status:!task.status,
-		// 	},
-		// 	...listTask.slice(index + 1)
-		// ];
-		// setListTask(tasks);
-		// localStorage.setItem("listTask",JSON.stringify(tasks));
-	}
 	const onUpdateTask = (id)=>
 	{
 		// const task= listTask.find(task => task.id === id);
@@ -135,7 +121,6 @@ function App(props) {
 					<div className="row">
 						<div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<TableTask 
-									toggleStatusTask={toggleStatusTask}
 									onDeleteTask={onDeleteTask}
 									onUpdateTask={onUpdateTask}
 									onFilter={onFilter}
