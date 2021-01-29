@@ -1,9 +1,11 @@
 import "./TaskForm.css";
 import {useState,useEffect} from "react";
 import {generateId} from "../generateID";
+import {connect} from "react-redux";
+import * as actions from "../../actions/index.js";
 
 function TaskForm(props) {
-    const {addTask,taskUpdate,onHandleUpdateTask,closeForm} = props;
+    const {onAddTask,taskUpdate,onHandleUpdateTask,closeForm} = props;
     const [name,setName] = useState("");
     const [status, setStatus] = useState(true);
 
@@ -42,7 +44,7 @@ function TaskForm(props) {
         };
         if(!taskUpdate)
         {
-            addTask(task);
+            onAddTask(task);
         }
         else
         {
@@ -98,4 +100,19 @@ function TaskForm(props) {
 	);
 }
 
-export default TaskForm;
+const mapStateToProps = state => {
+    return {
+
+    }
+}
+
+const mapDispatchToProps = (dispatch,props) => 
+{
+    return {
+        onAddTask: (task) => {
+            dispatch(actions.addTask(task))
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(TaskForm);

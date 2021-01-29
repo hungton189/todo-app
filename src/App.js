@@ -7,20 +7,12 @@ import TableTask from "./components/TableTask/TableTask.js";
 import {filterData} from "./components/FilterData.js";
 
 function App() {
-	const [listTask,setListTask] = useState([]);
 	const [isDisplayForm,setDisplayForm] = useState(false);
 	const [taskUpdate,setTaskUpdate] = useState(null);
 	const [filter,setFilter] = useState({name:"",status:-1});
 	const [keyword,setKeyword] = useState("");
 	const [sort,setSort] = useState(null);
 
-	useEffect(()=>{
-		if(localStorage && localStorage.getItem('listTask'))
-		{
-			let tasks = JSON.parse(localStorage.getItem('listTask'));
-			setListTask(tasks);
-		}
-	},[])
 	const toggleDisplayForm = ()=>
 	{
 		if(taskUpdate && isDisplayForm)
@@ -36,55 +28,55 @@ function App() {
 	}
 	const addTask = (task)=>
 	{
-		const tasks = [...listTask];
-		tasks.push(task);
-		setListTask(tasks);
-		localStorage.setItem("listTask",JSON.stringify(tasks));
+		// const tasks = [...listTask];
+		// tasks.push(task);
+		// setListTask(tasks);
+		// localStorage.setItem("listTask",JSON.stringify(tasks));
 	}
 	const toggleStatusTask = (id) => {
-		const task = listTask.find(task=>task.id === id);
-		const index = listTask.indexOf(task);
-		const tasks = [
-			...listTask.slice(0,index),
-			{
-				...task,
-				status:!task.status,
-			},
-			...listTask.slice(index + 1)
-		];
-		setListTask(tasks);
-		localStorage.setItem("listTask",JSON.stringify(tasks));
+		// const task = listTask.find(task=>task.id === id);
+		// const index = listTask.indexOf(task);
+		// const tasks = [
+		// 	...listTask.slice(0,index),
+		// 	{
+		// 		...task,
+		// 		status:!task.status,
+		// 	},
+		// 	...listTask.slice(index + 1)
+		// ];
+		// setListTask(tasks);
+		// localStorage.setItem("listTask",JSON.stringify(tasks));
 	}
 	const onUpdateTask = (id)=>
 	{
 		setDisplayForm(true);
-		const task= listTask.find(task => task.id === id);
-		setTaskUpdate(task);
+		// const task= listTask.find(task => task.id === id);
+		// setTaskUpdate(task);
 	}
 	const onHandleUpdateTask = (task)=>
 	{
-		if(!taskUpdate) return;
-		setDisplayForm(false);
-		setTaskUpdate(null);
-		const index= listTask.indexOf(taskUpdate);
-		if(index===-1) return;
-		const tasks = [
-			...listTask.slice(0,index),
-			{
-				...task,
-			},
-			...listTask.slice(index + 1)
-		];
-		setListTask(tasks);
-		localStorage.setItem("listTask",JSON.stringify(tasks));
+		// if(!taskUpdate) return;
+		// setDisplayForm(false);
+		// setTaskUpdate(null);
+		// const index= listTask.indexOf(taskUpdate);
+		// if(index===-1) return;
+		// const tasks = [
+		// 	// ...listTask.slice(0,index),
+		// 	{
+		// 		...task,
+		// 	},
+		// 	...listTask.slice(index + 1)
+		// ];
+		// setListTask(tasks);
+		// localStorage.setItem("listTask",JSON.stringify(tasks));
 	}
 	const onDeleteTask = (id) => 
 	{
-		const task = listTask.find(task=>task.id === id);
-		const index = listTask.indexOf(task);
-		const tasks = listTask.slice(0,index).concat(listTask.slice(index + 1));
-		setListTask(tasks);
-		localStorage.setItem("listTask",JSON.stringify(tasks));
+		// const task = listTask.find(task=>task.id === id);
+		// const index = listTask.indexOf(task);
+		// const tasks = listTask.slice(0,index).concat(listTask.slice(index + 1));
+		// setListTask(tasks);
+		// localStorage.setItem("listTask",JSON.stringify(tasks));
 	}
 	const onFilter = (name,status) =>
 	{
@@ -100,29 +92,29 @@ function App() {
 		setSort(sort);
 	}
 
-	var tasks = filterData(listTask,filter);
-	tasks = tasks.filter(task =>{
-		return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
-	});
-	if(sort) 
-	{
-		console.log(sort);
-		if(sort.by==="name")
-		{
-			tasks.sort((a,b)=>
-			{
-				return (a.name >b.name) ? sort.value : -sort.value;
-			})
-		}
-		else
-		{
-			tasks.sort((a,b)=>
-			{
-				return (a.status >b.status) ? -sort.value : sort.value;
-			})
-		}
-		console.log(tasks);
-	}
+	// var tasks = filterData(listTask,filter);
+	// tasks = tasks.filter(task =>{
+	// 	return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+	// });
+	// if(sort) 
+	// {
+	// 	console.log(sort);
+	// 	if(sort.by==="name")
+	// 	{
+	// 		tasks.sort((a,b)=>
+	// 		{
+	// 			return (a.name >b.name) ? sort.value : -sort.value;
+	// 		})
+	// 	}
+	// 	else
+	// 	{
+	// 		tasks.sort((a,b)=>
+	// 		{
+	// 			return (a.status >b.status) ? -sort.value : sort.value;
+	// 		})
+	// 	}
+	// 	console.log(tasks);
+	// }
 	return (
 		<div className="container mt-20 mb-50">
 			<h2 style={{textAlign: 'center'}}>Quản lý công việc</h2>
@@ -135,7 +127,6 @@ function App() {
 					}>
 					{
 						(isDisplayForm)? <TaskForm 
-											toggleDisplayForm={toggleDisplayForm} 
 											addTask = {addTask}
 											taskUpdate={taskUpdate}
 											onHandleUpdateTask={onHandleUpdateTask}

@@ -71,7 +71,7 @@ function TableTask(props) {
 
 const mapStateToProps = (state) => {
     return {
-        listTask:state.tasks
+        listTask: state.tasks
     }
 }
 

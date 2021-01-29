@@ -7,8 +7,13 @@ const taskReducer = (state = initialState, action)=>
     {
         case types.LIST_ALL:
             return state;
+        case types.ADD_TASK:
+            state.push(action.task);
+            localStorage.setItem("listTask",JSON.stringify(state));
+            return [...state];
         default:
-            return state
+            return state;
+        
     }
 }
 
