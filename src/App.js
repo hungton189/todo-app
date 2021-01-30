@@ -1,4 +1,3 @@
-import {useState} from "react";
 import './App.css';
 import TaskForm from './components/TaskForm/TaskForm.js';
 import Search from "./components/Search/Search.js";
@@ -8,34 +7,7 @@ import {connect} from "react-redux";
 import * as actions from "./actions/index";
 
 function App(props) {
-	const [sort,setSort] = useState(null);
 	const {isDisplayForm,onToggleForm,taskEditing,updateTaskEditing} = props;
-	const onHandleSort = (sort) =>
-	{
-		setSort(sort);
-	}
-	// tasks = tasks.filter(task =>{
-	// 	return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
-	// });
-	// if(sort) 
-	// {
-	// 	console.log(sort);
-	// 	if(sort.by==="name")
-	// 	{
-	// 		tasks.sort((a,b)=>
-	// 		{
-	// 			return (a.name >b.name) ? sort.value : -sort.value;
-	// 		})
-	// 	}
-	// 	else
-	// 	{
-	// 		tasks.sort((a,b)=>
-	// 		{
-	// 			return (a.status >b.status) ? -sort.value : sort.value;
-	// 		})
-	// 	}
-	// 	console.log(tasks);
-	// }
 	const onClickButton = () =>{
 		if(taskEditing.id){
 			updateTaskEditing({});
@@ -73,7 +45,7 @@ function App(props) {
 							<Search />
 						</div>
 						<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-							<Sort onHandleSort={onHandleSort}/>
+							<Sort />
 						</div>
 					</div>
 					<div className="row">

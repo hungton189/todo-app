@@ -4,13 +4,15 @@ import isDisplayForm from "./isDisplayForm";
 import taskEditing from "./taskEditing";
 import filterTask from "./filterTask";
 import keyword from "./searchTask";
+import keySort from "./sortTask";
 
 const myReducer = combineReducers({
     tasks:taskReducer,
     isDisplayForm,
     taskEditing,
     filterTask,
-    keyword
+    keyword,
+    keySort
 });
 
 export default myReducer;

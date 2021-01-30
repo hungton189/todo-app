@@ -2,10 +2,10 @@ import "./TableTask.css";
 import TaskItem from "../TaskItem/TaskItem.js";
 import {connect} from "react-redux";
 import * as actions from "../../actions/index";
-import {filterData} from "./FilterData";
+import {filterData,sortTask} from "./FilterData";
 
 function TableTask(props) {
-    const {listTask,filterTask,onFilter,keyword}  = props;
+    const {listTask,filterTask,onFilter,keyword,keySort}  = props;
     const onChange = (event) =>
     {
         const {value} = event.target;
@@ -18,6 +18,7 @@ function TableTask(props) {
     }
     let tasks = filterData(listTask,filterTask);
     tasks = filterData(tasks,{name:keyword,status:-1});
+    tasks = sortTask(tasks,keySort);
     const elementTasks =  tasks.map((task,index) => {
         return <TaskItem 
                     task={task} 
@@ -62,12 +63,12 @@ function TableTask(props) {
         </table>
 	);
 }
-
 const mapStateToProps = (state) => {
     return {
         listTask: state.tasks,
         filterTask:state.filterTask,
-        keyword:state.keyword
+        keyword:state.keyword,
+        keySort:state.keySort
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -77,5 +78,4 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 }
-
 export default connect(mapStateToProps,mapDispatchToProps)(TableTask);

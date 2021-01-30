@@ -1,17 +1,17 @@
 import "./Sort.css";
 import {useState} from "react";
+import * as actions from "../../actions/index";
+import {connect} from "react-redux";
 
 function Sort(props) {
     const [isDisplayFormSort,setDisplayFormSort] = useState(false);
-    const [sort,setSort] = useState({by:"",value:0});
-    const {onHandleSort} = props;
+    const {sort,onHandleSort} = props;
     const onClickButton = ()=> 
     {
         setDisplayFormSort(isDisplayFormSort=>!isDisplayFormSort);
     }
     const onClickSort = (by, value)=> 
     {
-        setSort({by,value});
         onHandleSort({by,value});
     } 
 	return (
@@ -29,26 +29,38 @@ function Sort(props) {
                     <span onClick={()=>onClickSort("name",1)}>
                         <i class="fas fa-sort-alpha-down"></i>
                         Tên A-Z
-                        {(sort.by==="name" && sort.value==1)?<i class="fas fa-check ml-10"></i>:""}
+                        {(sort.by==="name" && sort.value===1)?<i class="fas fa-check ml-10"></i>:""}
                     </span>
                     <span onClick={()=>onClickSort("name",-1)}>
                         <i class="fas fa-sort-alpha-up"></i>
                         Tên Z-A
-                        {(sort.by==="name" && sort.value==-1)?<i class="fas fa-check ml-10"></i>:""}
+                        {(sort.by==="name" && sort.value===-1)?<i class="fas fa-check ml-10"></i>:""}
                     </span>
                     <hr />
                     <span onClick={()=>onClickSort("status",1)}>
                         Trạng thái hoạt động
-                        {(sort.by==="status" && sort.value==1)?<i class="fas fa-check ml-10"></i>:""} 
+                        {(sort.by==="status" && sort.value===1)?<i class="fas fa-check ml-10"></i>:""} 
                     </span>
                     <span onClick={()=>onClickSort("status",-1)}>
                         Trạng thái ẩn
-                        {(sort.by==="status" && sort.value==-1)?<i class="fas fa-check ml-10"></i>:""}
+                        {(sort.by==="status" && sort.value===-1)?<i class="fas fa-check ml-10"></i>:""}
                     </span>
                 </div>
             }
         </div>
 	);
 }
+const mapStateToProps = (state) => {
+    return {
+        sort: state.keySort
+    }
+}
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        onHandleSort:(sort)=>{
+            dispatch(actions.sortTask(sort))
+        }
+    }
+}
 
-export default Sort;
+export default connect(mapStateToProps, mapDispatchToProps)(Sort);

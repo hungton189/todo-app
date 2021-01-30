@@ -40,6 +40,7 @@ function TaskForm(props) {
         onClearForm();
         if(taskEditing.id)
         {
+            updateTaskEditing({});
             onCloseForm();
         }
     }

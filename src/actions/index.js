@@ -42,7 +42,13 @@ export const searchTask = (keyword) =>{
         type:types.SEARCH_TASK,
         keyword
     }
-}    
+}
+export const sortTask = (keySort) =>{
+    return {
+        type:types.SORT_TASK,
+        keySort
+    }
+}   
 export const toggleForm = () =>
 {
     return {

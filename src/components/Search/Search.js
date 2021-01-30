@@ -6,8 +6,7 @@ import * as actions from "../../actions/index";
 function Search(props) {
     const {searchTask,keyword} = props;
     const [inputKeyword,setInputKeyword] = useState(keyword);
-    const onChange = (event)=>
-    {
+    const onChange = (event)=>{
         const {value} = event.target;
         setInputKeyword(value);
     }
