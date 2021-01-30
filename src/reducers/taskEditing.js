@@ -8,8 +8,7 @@ const taskEditingReducer = (state = initialState, action)=>
         case types.UPDATE_TASK:
             return action.task;
         default:
-            return state;
-        
+            return state;    
     }
 }
 

@@ -30,7 +30,13 @@ export const updateTaskEditing = (task) =>{
         type:types.UPDATE_TASK,
         task
     }
-}  
+}
+export const filterTask = (filter) =>{
+    return {
+        type:types.FILTER_TASK,
+        filter
+    }
+}   
 export const toggleForm = () =>
 {
     return {

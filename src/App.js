@@ -1,23 +1,16 @@
-import {useEffect,useState} from "react";
+import {useState} from "react";
 import './App.css';
 import TaskForm from './components/TaskForm/TaskForm.js';
 import Search from "./components/Search/Search.js";
 import Sort from "./components/Sort/Sort.js";
 import TableTask from "./components/TableTask/TableTask.js";
-import {filterData} from "./components/FilterData.js";
 import {connect} from "react-redux";
 import * as actions from "./actions/index";
 
 function App(props) {
-	const [filter,setFilter] = useState({name:"",status:-1});
 	const [keyword,setKeyword] = useState("");
 	const [sort,setSort] = useState(null);
 	const {isDisplayForm,onToggleForm,taskEditing,updateTaskEditing} = props;
-
-	const onFilter = (name,status) =>
-	{
-		setFilter({name,status});
-	}
 
 	const onSearch = (keyword) =>
 	{
@@ -27,8 +20,6 @@ function App(props) {
 	{
 		setSort(sort);
 	}
-
-	// var tasks = filterData(listTask,filter);
 	// tasks = tasks.filter(task =>{
 	// 	return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
 	// });
@@ -93,9 +84,7 @@ function App(props) {
 					</div>
 					<div className="row">
 						<div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<TableTask
-									onFilter={onFilter}
-							/>
+							<TableTask />
 						</div>
 					</div>
 				</div>

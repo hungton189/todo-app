@@ -38,6 +38,10 @@ function TaskForm(props) {
         };
         onSaveTask(task);
         onClearForm();
+        if(taskEditing.id)
+        {
+            onCloseForm();
+        }
     }
     const onClearForm = ()=>{
         setName("");

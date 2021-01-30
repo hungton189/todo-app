@@ -1,27 +1,23 @@
 import "./TableTask.css";
-import {useState} from "react";
 import TaskItem from "../TaskItem/TaskItem.js";
 import {connect} from "react-redux";
+import * as actions from "../../actions/index";
+import {filterData} from "./FilterData";
 
 function TableTask(props) {
-    const [filterName, setFilterName] = useState("");
-    const [filterStatus, setFilterStatus] = useState(-1);
-    const {listTask,onFilter}  = props;
+    const {listTask,filterTask,onFilter}  = props;
     const onChange = (event) =>
     {
-        const {name,value} = event.target;
-        if(name ==="filterName")
-        {
-            onFilter(value,filterStatus);
-            setFilterName(value);
-        }
-        else
-        {
-            onFilter(filterName,value);
-            setFilterStatus(value);
+        const {value} = event.target;
+        const {name,status} = filterTask;
+        if(event.target.name==="filterName"){
+            onFilter({name:value,status});
+        } else if(event.target.name==="filterStatus"){
+            onFilter({name,status:parseInt(value)});
         }
     }
-    const elementTasks =  listTask.map((task,index) => {
+    const tasks = filterData(listTask,filterTask);
+    const elementTasks =  tasks.map((task,index) => {
         return <TaskItem 
                     task={task} 
                     index={index} 
@@ -43,7 +39,7 @@ function TableTask(props) {
                         type = "text" 
                         name = "filterName" 
                         className = "form-control"
-                        value = {filterName}
+                        value = {filterTask.name}
                         onChange={onChange}
                     />
                 </td>
@@ -51,7 +47,7 @@ function TableTask(props) {
                     <select 
                         name = "filterStatus" 
                         className = "form-control"
-                        value = {filterStatus}
+                        value = {filterTask.status}
                         onChange = {onChange}
                     >
                         <option value = {-1}>Tất cả</option>
@@ -68,8 +64,16 @@ function TableTask(props) {
 
 const mapStateToProps = (state) => {
     return {
-        listTask: state.tasks
+        listTask: state.tasks,
+        filterTask:state.filterTask
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onFilter:(filter) => {
+            dispatch(actions.filterTask(filter))
+        }
     }
 }
 
-export default connect(mapStateToProps,null)(TableTask);
+export default connect(mapStateToProps,mapDispatchToProps)(TableTask);
