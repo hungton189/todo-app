@@ -5,7 +5,7 @@ import * as actions from "../../actions/index";
 import {filterData} from "./FilterData";
 
 function TableTask(props) {
-    const {listTask,filterTask,onFilter}  = props;
+    const {listTask,filterTask,onFilter,keyword}  = props;
     const onChange = (event) =>
     {
         const {value} = event.target;
@@ -16,7 +16,8 @@ function TableTask(props) {
             onFilter({name,status:parseInt(value)});
         }
     }
-    const tasks = filterData(listTask,filterTask);
+    let tasks = filterData(listTask,filterTask);
+    tasks = filterData(tasks,{name:keyword,status:-1});
     const elementTasks =  tasks.map((task,index) => {
         return <TaskItem 
                     task={task} 
@@ -65,7 +66,8 @@ function TableTask(props) {
 const mapStateToProps = (state) => {
     return {
         listTask: state.tasks,
-        filterTask:state.filterTask
+        filterTask:state.filterTask,
+        keyword:state.keyword
     }
 }
 const mapDispatchToProps = (dispatch) => {

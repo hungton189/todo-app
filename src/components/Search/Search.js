@@ -1,13 +1,18 @@
 import "./Search.css";
 import {useState} from "react";
+import {connect} from "react-redux";
+import * as actions from "../../actions/index";
 
 function Search(props) {
-    const {onSearch} = props;
-    const [keyword,setKeyword] = useState("");
+    const {searchTask,keyword} = props;
+    const [inputKeyword,setInputKeyword] = useState(keyword);
     const onChange = (event)=>
     {
         const {value} = event.target;
-        setKeyword(value);
+        setInputKeyword(value);
+    }
+    const onSearch = () => {
+        searchTask(inputKeyword);
     }
 	return (
         <div className="form-group search">
@@ -15,13 +20,14 @@ function Search(props) {
                 type="text"
                 className="form-control" 
                 name="inputKeyword" 
-                placeholder="Nhập từ khóa.." 
-                onChange={onChange}
+                placeholder="Nhập từ khóa.."
+                value={inputKeyword}
+                onChange={onChange} 
             />
             <button 
                 type="button" 
                 className="btn btn-primary"  
-                onClick={()=>onSearch(keyword)} 
+                onClick={onSearch} 
             >
                 <i className="fas fa-search"></i>
                 &#160;Tìm
@@ -29,5 +35,17 @@ function Search(props) {
         </div>
 	);
 }
+const mapStateToProps = (state) => {
+    return {
+        keyword: state.keyword
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        searchTask: (keyword) => {
+            dispatch(actions.searchTask(keyword))
+        }
+    }
+}
 
-export default Search;
+export default connect(mapStateToProps,mapDispatchToProps) (Search);

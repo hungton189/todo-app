@@ -8,14 +8,8 @@ import {connect} from "react-redux";
 import * as actions from "./actions/index";
 
 function App(props) {
-	const [keyword,setKeyword] = useState("");
 	const [sort,setSort] = useState(null);
 	const {isDisplayForm,onToggleForm,taskEditing,updateTaskEditing} = props;
-
-	const onSearch = (keyword) =>
-	{
-		setKeyword(keyword);
-	}
 	const onHandleSort = (sort) =>
 	{
 		setSort(sort);
@@ -76,7 +70,7 @@ function App(props) {
 					</button>
 					<div className="row mt-10">
 						<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-							<Search onSearch={onSearch}/>
+							<Search />
 						</div>
 						<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 							<Sort onHandleSort={onHandleSort}/>

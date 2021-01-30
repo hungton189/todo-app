@@ -36,7 +36,13 @@ export const filterTask = (filter) =>{
         type:types.FILTER_TASK,
         filter
     }
-}   
+}
+export const searchTask = (keyword) =>{
+    return {
+        type:types.SEARCH_TASK,
+        keyword
+    }
+}    
 export const toggleForm = () =>
 {
     return {
